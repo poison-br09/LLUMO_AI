@@ -45,7 +45,7 @@ async def search_by_skill(
 
 # Create employee (protected; remove user param if you don't want auth)
 @router.post("/", response_model=EmployeeOut, status_code=201)
-async def create_employee(emp: EmployeeCreate, user: Optional[Dict[str, Any]] = Depends(get_current_user)):
+async def create_employee(emp: EmployeeCreate): #, user: Optional[Dict[str, Any]] = Depends(get_current_user)):
     try:
         created = await employee_service.create_employee(emp.dict())
         return created
@@ -66,8 +66,8 @@ async def get_employee(employee_id: str):
 @router.put("/{employee_id}", response_model=EmployeeOut)
 async def update_employee(
     employee_id: str,
-    updates: EmployeeUpdate,
-    user: Optional[Dict[str, Any]] = Depends(get_current_user),
+    updates: EmployeeUpdate
+    #user: Optional[Dict[str, Any]] = Depends(get_current_user),
 ):
     res = await employee_service.update_employee(employee_id, updates.dict(exclude_unset=True))
     if res is None:
