@@ -64,7 +64,6 @@ async def create_employee(payload: Dict[str, Any]) -> Dict[str, Any]:
     try:
         res = await coll.insert_one(doc)
     except DuplicateKeyError:
-        # bubble up for router to convert to HTTP 400
         raise DuplicateKeyError("employee_id must be unique")
     created = await coll.find_one({"_id": res.inserted_id})
     return employee_helper(created)
