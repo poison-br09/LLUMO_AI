@@ -3,7 +3,6 @@ from typing import Optional
 from pydantic_settings import BaseSettings
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorCollection, AsyncIOMotorDatabase
 from dotenv import load_dotenv
-import os
 
 # load .env file (if present)
 load_dotenv()
